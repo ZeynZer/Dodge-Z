@@ -1,0 +1,58 @@
+{
+ "duration": 29.5,
+ "fps": 30,
+ "size": [
+  720,
+  1280
+ ],
+ "chapters": [
+  [
+   0,
+   "hero_shot"
+  ],
+  [
+   4.0,
+   "logo_shot"
+  ],
+  [
+   6.3,
+   "shot"
+  ],
+  [
+   8.7,
+   "shot"
+  ],
+  [
+   10.2,
+   "run_dash_jump"
+  ],
+  [
+   12.6,
+   "combo_shot"
+  ],
+  [
+   14.5,
+   "defense_shot"
+  ],
+  [
+   15.7,
+   "ki_shot"
+  ],
+  [
+   17.3,
+   "transform_shot"
+  ],
+  [
+   19.9,
+   "cutin_shot"
+  ],
+  [
+   21.2,
+   "ult_shot"
+  ],
+  [
+   24.5,
+   "final_shot"
+  ]
+ ]
+}

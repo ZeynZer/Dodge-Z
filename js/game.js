@@ -37,10 +37,10 @@ function resize(){
 /* ---------- combattants ---------- */
 function mkF(o){return Object.assign({x:0,y:0,face:1,cur:clonePose(PO.idle),from:clonePose(PO.idle),to:PO.idle,k:1,dur:.1,q:[],hold:0,holdT:0,
   v:'classic',pal:PALS[0],epal:EPAL,fem:false,enemy:false,boss:null,alpha:1,flash:0,scale:1,sy:1,gun:false,tx:null,sp:9,
-  phys:false,vx:0,vy:0,g:1500,spin:0,spinV:0,hidden:false,aura:null,noShadow:false},o);}
+  phys:false,vx:0,vy:0,g:1500,spin:0,spinV:0,hidden:false,aura:null,noShadow:false,anim:'idle',animT:0,clip:null,clipT0:0},o);}
 const P=mkF({face:1}),E=mkF({face:-1,enemy:true,gun:true});
-function setPose(f,name,dur=.1){f.from=clonePose(f.cur);f.to=typeof name==='string'?PO[name]:name;f.k=0;f.dur=Math.max(.001,dur);f.q=[];}
-function nextQ(f){const s=f.q.shift();if(!s)return;f.from=clonePose(f.cur);f.to=typeof s[0]==='string'?PO[s[0]]:s[0];f.k=0;f.dur=Math.max(.001,s[1]);f.hold=s[2]||0;f.holdT=0;}
+function setPose(f,name,dur=.1){f.anim=typeof name==='string'?name:null;f.animT=G.time;f.from=clonePose(f.cur);f.to=typeof name==='string'?PO[name]:name;f.k=0;f.dur=Math.max(.001,dur);f.q=[];}
+function nextQ(f){const s=f.q.shift();if(!s)return;f.anim=typeof s[0]==='string'?s[0]:null;f.animT=G.time;f.from=clonePose(f.cur);f.to=typeof s[0]==='string'?PO[s[0]]:s[0];f.k=0;f.dur=Math.max(.001,s[1]);f.hold=s[2]||0;f.holdT=0;}
 function seq(f,list){f.q=list.slice();nextQ(f);}
 function updF(f,dt){
   if(f.k<1){f.k=Math.min(1,f.k+dt/f.dur);f.cur=mixPose(f.from,f.to,easeIO(f.k));}
@@ -57,7 +57,7 @@ function loadPlayer(){
 }
 function resetPlayerPos(x=PX0){
   P.x=x;P.tx=null;P.y=GROUND;P.face=1;P.alpha=1;P.flash=0;P.scale=1;P.sy=1;P.phys=false;P.spin=0;P.spinV=0;P.vx=P.vy=0;P.hidden=false;P.aura=null;P.gun=false;
-  P.cur=clonePose(PO.idle);P.from=clonePose(PO.idle);P.to=PO.idle;P.k=1;P.q=[];
+  P.cur=clonePose(PO.idle);P.from=clonePose(PO.idle);P.to=PO.idle;P.k=1;P.q=[];P.anim='idle';P.clip=null;
 }
 function setupEnemy(v,boss){
   E.v=v;E.boss=boss||null;E.enemy=true;E.fem=Math.random()<.3;E.face=-1;E.x=EX;E.y=GROUND;E.alpha=1;E.flash=0;
@@ -100,7 +100,7 @@ function popup(txt,x,y,col='#fff',size=22,life=.9,vy=-45){FX.t.push({txt,x,y,col
 function ring(x,y,r0,r1,life=.5,col='#fff',w=5){FX.r.push({x,y,r0,r1,life,max:life,col,w});}
 function slash(x1,y1,x2,y2,life=.25,col='#fff',w=6){FX.l.push({x1,y1,x2,y2,life,max:life,col,w});}
 function prop(o){const p=Object.assign({life:9,t:0,x:0,y:0,vx:0,vy:0,g:0,rot:0,vr:0,draw:null,z:1},o);FX.pr.push(p);return p;}
-function ghost(f,col){FX.gh.push({x:f.x,y:f.y,face:f.face,pose:clonePose(f.cur),v:f.v,pal:f.pal,fem:f.fem,enemy:f.enemy,epal:f.epal,scale:f.scale,dx:0,life:.3,max:.3,col:col||(f.enemy?'#ff3050':'#66eeff')});}
+function ghost(f,col){FX.gh.push({anim:f.anim,at:G.time-f.animT,clip:f.clip,clipAt:G.time-f.clipT0,x:f.x,y:f.y,face:f.face,pose:clonePose(f.cur),v:f.v,pal:f.pal,fem:f.fem,enemy:f.enemy,epal:f.epal,scale:f.scale,dx:0,life:.3,max:.3,col:col||(f.enemy?'#ff3050':'#66eeff')});}
 function dissolve(f){
   const bp=bodyPos(f,.5);
   for(let i=0;i<70;i++){const x=bp[0]+rand(-24,24),y=bp[1]+rand(-60,60);
@@ -326,7 +326,7 @@ function render(){
   c.restore();
   if(G.dark>0){c.globalAlpha=G.dark;c.fillStyle=G.darkCol;c.fillRect(-W*2,-H*2,W*5,H*5);c.globalAlpha=1;}
   /* fantômes + props arrière */
-  for(const g of FX.gh){c.globalAlpha=g.life/g.max*.5;c.save();drawCyborg(c,{x:g.x,y:g.y,face:g.face,scale:g.scale,v:g.v,pal:g.pal,fem:g.fem,enemy:g.enemy,epal:g.epal,pose:g.pose,noShadow:true,aura:null,flash:.8});c.restore();}
+  for(const g of FX.gh){c.globalAlpha=g.life/g.max*.5;c.save();drawCyborg(c,{anim:g.anim,at:g.at,clip:g.clip,clipAt:g.clipAt,x:g.x,y:g.y,face:g.face,scale:g.scale,v:g.v,pal:g.pal,fem:g.fem,enemy:g.enemy,epal:g.epal,pose:g.pose,noShadow:true,aura:null,flash:.8});c.restore();}
   c.globalAlpha=1;
   for(const p of FX.pr)if(p.z<0)drawProp(c,p);
   /* combattants */
@@ -336,7 +336,7 @@ function render(){
     const pose=breath?Object.assign({},f.cur,{lean:f.cur.lean+Math.sin(G.time*2.6+(f.enemy?1.7:0))*.018,air:(f.cur.air||0)+Math.sin(G.time*5.2)*.9}):f.cur;
     let jx=0;
     if(f.enemy&&inFight&&Math.sin(G.time*3.1)>.985)jx=rand(-3,3);
-    drawCyborg(c,{x:f.x+jx,y:f.y,face:f.face,scale:f.scale,sy:f.sy,v:f.v,pal:f.pal,epal:f.epal,fem:f.fem,enemy:f.enemy,boss:f.boss,pose,gun:f.gun,alpha:f.alpha,flash:f.flash,spin:f.spin,aura:f.aura,noShadow:f.noShadow});
+    drawCyborg(c,{anim:f.anim,at:G.time-f.animT,clip:f.clip,clipAt:G.time-f.clipT0,x:f.x+jx,y:f.y,face:f.face,scale:f.scale,sy:f.sy,v:f.v,pal:f.pal,epal:f.epal,fem:f.fem,enemy:f.enemy,boss:f.boss,pose,gun:f.gun,alpha:f.alpha,flash:f.flash,spin:f.spin,aura:f.aura,noShadow:f.noShadow});
   };
   drawF(E);drawF(P);
   if(menuLike&&MENU.ball)drawBall(c);

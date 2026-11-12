@@ -1,0 +1,181 @@
+{
+ "clips": {
+  "idle": {
+   "src": "idle.webp",
+   "fw": 264,
+   "fh": 316,
+   "n": 18,
+   "cols": 15,
+   "fps": 12,
+   "loop": true,
+   "ax": 122.4,
+   "ay": 301.7
+  },
+  "idle_power": {
+   "src": "idle_power.webp",
+   "fw": 346,
+   "fh": 428,
+   "n": 18,
+   "cols": 11,
+   "fps": 12,
+   "loop": true,
+   "ax": 173.4,
+   "ay": 413.7
+  },
+  "walk": {
+   "src": "walk.webp",
+   "fw": 284,
+   "fh": 306,
+   "n": 8,
+   "cols": 8,
+   "fps": 10,
+   "loop": true,
+   "ax": 126.5,
+   "ay": 291.7
+  },
+  "run": {
+   "src": "run.webp",
+   "fw": 408,
+   "fh": 306,
+   "n": 6,
+   "cols": 6,
+   "fps": 12,
+   "loop": true,
+   "ax": 234.6,
+   "ay": 291.7
+  },
+  "dash": {
+   "src": "dash.webp",
+   "fw": 550,
+   "fh": 306,
+   "n": 10,
+   "cols": 7,
+   "fps": 20,
+   "loop": false,
+   "ax": 255.0,
+   "ay": 291.7
+  },
+  "jump": {
+   "src": "jump.webp",
+   "fw": 326,
+   "fh": 428,
+   "n": 15,
+   "cols": 12,
+   "fps": 15,
+   "loop": false,
+   "ax": 142.8,
+   "ay": 413.7
+  },
+  "combo": {
+   "src": "combo.webp",
+   "fw": 488,
+   "fh": 386,
+   "n": 21,
+   "cols": 8,
+   "fps": 15,
+   "loop": false,
+   "ax": 153.0,
+   "ay": 371.7
+  },
+  "guard": {
+   "src": "guard.webp",
+   "fw": 346,
+   "fh": 316,
+   "n": 11,
+   "cols": 11,
+   "fps": 15,
+   "loop": false,
+   "ax": 153.0,
+   "ay": 301.7
+  },
+  "hurt": {
+   "src": "hurt.webp",
+   "fw": 326,
+   "fh": 316,
+   "n": 9,
+   "cols": 9,
+   "fps": 15,
+   "loop": false,
+   "ax": 193.8,
+   "ay": 301.7
+  },
+  "ko": {
+   "src": "ko.webp",
+   "fw": 510,
+   "fh": 294,
+   "n": 20,
+   "cols": 8,
+   "fps": 12,
+   "loop": false,
+   "ax": 346.8,
+   "ay": 279.7
+  },
+  "kiblast": {
+   "src": "kiblast.webp",
+   "fw": 774,
+   "fh": 326,
+   "n": 16,
+   "cols": 5,
+   "fps": 15,
+   "loop": false,
+   "ax": 132.6,
+   "ay": 311.7
+  },
+  "kiboom": {
+   "src": "kiboom.webp",
+   "fw": 306,
+   "fh": 306,
+   "n": 13,
+   "cols": 13,
+   "fps": 20,
+   "loop": false,
+   "ax": 153.0,
+   "ay": 291.7
+  },
+  "transform": {
+   "src": "transform.webp",
+   "fw": 428,
+   "fh": 590,
+   "n": 28,
+   "cols": 9,
+   "fps": 15,
+   "loop": false,
+   "ax": 214.2,
+   "ay": 575.7
+  },
+  "ultimate": {
+   "src": "ultimate.webp",
+   "fw": 1060,
+   "fh": 510,
+   "n": 46,
+   "cols": 3,
+   "fps": 15,
+   "loop": false,
+   "ax": 183.6,
+   "ay": 495.7
+  },
+  "intro": {
+   "src": "intro.webp",
+   "fw": 366,
+   "fh": 428,
+   "n": 34,
+   "cols": 11,
+   "fps": 15,
+   "loop": false,
+   "ax": 183.6,
+   "ay": 413.7
+  },
+  "victory": {
+   "src": "victory.webp",
+   "fw": 366,
+   "fh": 428,
+   "n": 20,
+   "cols": 11,
+   "fps": 12,
+   "loop": false,
+   "ax": 183.6,
+   "ay": 413.7
+  }
+ },
+ "U": 204
+}

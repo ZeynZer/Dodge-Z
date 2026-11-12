@@ -176,6 +176,7 @@ body.ingame #pauseBtn{display:grid}
 .rdots i{width:8px;height:8px;background:#333}
 .rdots i.on{background:var(--red)}
 
+#cineVid{position:absolute;inset:0;z-index:90;background:#000;display:none}#cineVid.on{display:block}#cineVid video{width:100%;height:100%;object-fit:cover;display:block}#cineVid .skip{position:absolute;right:12px;top:calc(env(safe-area-inset-top,0px) + 12px)}
 #toast{position:absolute;left:50%;bottom:calc(env(safe-area-inset-bottom,0px) + 100px);transform:translate(-50%,20px);background:#15151c;border:1px solid var(--red);padding:10px 16px;font-size:13px;font-weight:600;letter-spacing:.06em;opacity:0;pointer-events:none;transition:.25s;z-index:80;max-width:86%;text-align:center}
 #toast.on{opacity:1;transform:translate(-50%,0)}
 @media (prefers-reduced-motion:reduce){.glitch,.tapplay,.pk::after,#superBtn.on{animation:none}}
@@ -214,7 +215,7 @@ body.ingame #pauseBtn{display:grid}
     <div class="hd"><button class="back" data-go="home" aria-label="Retour">‹</button><h2>Cyborgs</h2><span class="sp"></span><div class="curs"><span class="chip"><i class="coin"></i><span class="vCoins">0</span></span></div></div>
     <div class="sheet">
       <div class="vtabs" id="vtabs"></div>
-      <div class="pinfo"><div class="n" id="pName"></div><div class="d" id="pDesc"></div><div class="s" id="pSup"></div></div>
+      <div class="pinfo"><div class="n" id="pName"></div><div class="d" id="pDesc"></div><div class="s" id="pSup"></div><button class="btn sm ghost" id="cineBtn" style="display:none;margin-top:8px" onclick="playCinematic()">▶ Cinématique</button></div>
       <div class="skins" id="skins"></div>
       <button class="btn block" id="equipBtn">Équiper</button>
     </div>
@@ -263,12 +264,14 @@ body.ingame #pauseBtn{display:grid}
     <div class="row"><button class="btn ghost sm sp" id="rPacks">Packs</button><button class="btn ghost sm sp" id="rHome">Menu</button></div></div></div>
 
   <div id="reveal" class="overlay"></div>
+  <div id="cineVid"><video playsinline preload="none" poster="assets/shadow/video/shadow_fighter_cinematic_poster.jpg"></video><button class="btn sm ghost skip">Passer ›</button></div>
   <div id="toast"></div>
 </div>
 <script src="js/core.js"></script>
 <script src="js/art.js"></script>
 <script src="js/game.js"></script>
 <script src="js/fights.js"></script>
+<script src="js/shadow.js"></script>
 <script src="js/ui.js"></script>
 </body>
 </html>

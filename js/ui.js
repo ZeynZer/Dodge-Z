@@ -67,9 +67,9 @@ function buildChars(){
   VARIANTS.forEach(x=>{const b=document.createElement('button');b.className='vtab'+(x.id===v?' on':'')+(ownsV(x.id)?'':' lock');b.textContent=x.name.split(' ')[0];
     b.onclick=()=>{Au.select();const s=ownsV(x.id)?(SV.selS[x.id]||0):0;setPreview(x.id,s,true);buildChars();};tabs.appendChild(b);});
   const V=vOf(v);
-  $('#pName').textContent=V.name+' — '+V.title;$('#pDesc').textContent=V.desc;$('#pSup').textContent='Super : '+V.sup;
+  $('#pName').textContent=V.name+' — '+V.title;$('#pDesc').textContent=V.desc;$('#pSup').textContent='Super : '+V.sup;$('#cineBtn').style.display=v==='shadow'?'':'none';
   const g=$('#skins');g.innerHTML='';
-  for(let i=0;i<20;i++){
+  for(let i=0;i<(v==='shadow'?1:20);i++){ /* SHADOW : un seul skin (art dessiné) */
     const owned=ownsV(v)&&ownsS(v,i),b=document.createElement('button');
     b.className='skin'+(prevSel.s===i?' sel':'')+(SV.selV===v&&(SV.selS[v]||0)===i&&owned?' eq':'');
     b.innerHTML='<canvas></canvas><span class="sn"></span><i class="rb"></i>';
@@ -111,8 +111,8 @@ function rollItem(pack,minR){
     const v=pick(w);return{t:'v',v:v.id,r:vRar(v)};
   }
   const r=rollRarity(pack.odds,minR),pool=[];
-  SV.ownV.forEach(id=>{for(let i=0;i<20;i++)if(skinRar(i)===r)pool.push({v:id,i,own:ownsS(id,i)});});
-  if(!pool.length){SV.ownV.forEach(id=>{for(let i=0;i<20;i++)pool.push({v:id,i,own:ownsS(id,i)});});}
+  SV.ownV.forEach(id=>{for(let i=0;i<(id==='shadow'?1:20);i++)if(skinRar(i)===r)pool.push({v:id,i,own:ownsS(id,i)});});
+  if(!pool.length){SV.ownV.forEach(id=>{for(let i=0;i<(id==='shadow'?1:20);i++)pool.push({v:id,i,own:ownsS(id,i)});});}
   const nw=pool.filter(p=>!p.own),p=pick(nw.length&&Math.random()<.85?nw:pool);
   return{t:'s',v:p.v,i:p.i,r:skinRar(p.i)};
 }

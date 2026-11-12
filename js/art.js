@@ -15,7 +15,8 @@ const VARIANTS=[
   {id:'hoops',name:'DUNK',title:'Le Basketteur',sup:'SLAM DUNK',rar:1,desc:'Dribble, saute, écrase. Son super atterrit du ciel.'},
   {id:'prof',name:'PROF. VOLT',title:'Le Professeur',sup:'THÉORÈME FINAL',rar:1,desc:'Il calcule la trajectoire de chaque balle. Et de chaque adversaire.'},
   {id:'agent',name:'AGENT 00',title:'L\'Agent Secret',sup:'TIR FANTÔME',rar:2,desc:'Costume noir, sang-froid, une seule balle.'},
-  {id:'boxer',name:'KO-RUSH',title:'Le Boxeur',sup:'COMBO KO',rar:2,desc:'Il n\'esquive pas, il danse. Puis il frappe huit fois.'}
+  {id:'boxer',name:'KO-RUSH',title:'Le Boxeur',sup:'COMBO KO',rar:2,desc:'Il n\'esquive pas, il danse. Puis il frappe huit fois.'},
+  {id:'shadow',name:'SHADOW',title:'Le Combattant des Ombres',sup:'ÉCLIPSE ÉCARLATE',rar:3,desc:'Né des ombres, il ne se bat pas pour la gloire : il se bat pour survivre. Son aura écarlate dévore la lumière.'}
 ];
 const VID=VARIANTS.map(v=>v.id);
 const vOf=id=>VARIANTS.find(v=>v.id===id);
@@ -104,6 +105,7 @@ function dot(c,p,r,col,edge){c.fillStyle=edge;c.beginPath();c.arc(p[0],p[1],r+1.
 function rrect(c,x,y,w,h,r){c.beginPath();c.moveTo(x+r,y);c.arcTo(x+w,y,x+w,y+h,r);c.arcTo(x+w,y+h,x,y+h,r);c.arcTo(x,y+h,x,y,r);c.arcTo(x,y,x+w,y,r);c.closePath();}
 
 function drawCyborg(c,o){
+  if(o.v==='shadow'&&typeof drawShadow==='function'&&drawShadow(c,o))return;
   const P=o.pose,k=skeleton(P),en=!!o.enemy,fem=!!o.fem,v=o.v;
   const pal=en?o.epal:o.pal;
   const fl=o.flash||0;

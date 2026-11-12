@@ -292,7 +292,7 @@ async function superMove(){
 }
 async function cineEnd(){
   G.cine=null;
-  P.tx=null;P.alpha=1;P.face=1;P.spin=0;P.y=GROUND;P.gun=false;P.aura=null;P.phys=false;P.sy=1;P.flash=0;
+  P.tx=null;P.alpha=1;P.face=1;P.spin=0;P.y=GROUND;P.gun=false;P.aura=null;P.phys=false;P.sy=1;P.flash=0;P.clip=null;
   setPose(P,'idle',.2);
   tw(cam,{z:1,fx:W/2,fy:H/2},.4);
   await tw(G,{dark:0,hudA:1},.35);
@@ -300,6 +300,20 @@ async function cineEnd(){
   P.x=PX0;
 }
 const CINE={
+  async shadow(){ /* ÉCLIPSE ÉCARLATE : clip « ultimate » (charge 1,25 s puis rayon) */
+    tw(G,{dark:.8},.3);await tw(P,{x:66},.3);tw(cam,{z:1.06,fx:W/2,fy:GROUND-90},.5,easeOut);
+    const done=playClip(P,'ultimate');Au.charge(1.25);
+    await wait(1.25);
+    flashScr('#fff',.9);Au.boom();shake(30);hitstop(.08);
+    const ey=GROUND-70;
+    for(let i=0;i<6;i++){E.flash=i%2?1:.4;setPose(E,i%2?'hit':'stun',.04);Au.hit();shake(14);
+      burst(E.x,ey,12,['#fff','#ff2a44','#ff6bd0'],340,4,.45);await wait(.2);}
+    await done;
+    flashScr('#fff',1);Au.boom();shake(36);ring(E.x,ey,10,220,.6,'#ff1e3c',12);ring(E.x,ey,10,150,.45,'#fff',8);
+    dissolve(E);burst(E.x,ey,60,['#fff','#ff2a44'],520,6,.9);
+    P.clip=null;setPose(P,'victory',.2);
+    await wait(.9);
+  },
   async classic(){
     tw(G,{dark:.8},.3);tw(P,{x:140},.4);tw(cam,{z:1.6,fx:150,fy:GROUND-70},.5,easeOut);
     setPose(P,'charge',.3);P.aura='#ff1e3c';Au.charge(1.3);
@@ -456,6 +470,7 @@ function resetRun(){
 }
 function startRun(lv){
   Au.init();abortAll();resetRun();if(typeof lv==='number')G.level=lv;loadPlayer();resetPlayerPos(PX0);setPose(E,'eIdle',.01);
+  if(P.v==='shadow'){playClip(P,'intro').then(()=>{if(P.clip==='intro')P.clip=null;});}
   G.mode='play';G.paused=false;resetCam();P.scale=1;
   uiShow(null);document.body.classList.add('ingame');wake();
   Au.music('play',0);
