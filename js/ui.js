@@ -229,7 +229,10 @@ function boot(){
   $('#installBtn').onclick=install;$('#installBtn2').onclick=install;
   $('#resetBtn').onclick=e=>{const b=e.currentTarget;if(b.dataset.arm){try{localStorage.removeItem(SAVE_KEY);}catch(x){}SV=DEFSAVE();save();Au.apply();toast('Sauvegarde effacée');goHome();}else{b.dataset.arm='1';b.textContent='Confirmer l\'effacement';}};
   if('serviceWorker' in navigator&&/^https?:$/.test(location.protocol)){
-    navigator.serviceWorker.register('sw.js').catch(()=>{});
+    /* nouvelle version installée → on recharge une fois pour ne pas garder l'ancien JS en cache */
+    const had=!!navigator.serviceWorker.controller;let reloaded=false;
+    navigator.serviceWorker.addEventListener('controllerchange',()=>{if(had&&!reloaded){reloaded=true;location.reload();}});
+    navigator.serviceWorker.register('sw.js').then(r=>r.update()).catch(()=>{});
   }
   requestAnimationFrame(frame);
   const bar=$('#loadbar');let p=0;
