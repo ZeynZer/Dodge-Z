@@ -1,5 +1,5 @@
 /* Dodge Zero — service worker : jeu 100 % hors-ligne après la première visite */
-const VERSION='dz-v1.1.0';
+const VERSION='dz-v1.1.1';
 const CORE=['./','./index.html','./manifest.webmanifest','./js/core.js','./js/art.js','./js/game.js','./js/fights.js','./js/shadow.js','./js/ui.js',
   './assets/shadow/sheets/manifest.json','./assets/shadow/sheets/idle.webp','./assets/shadow/sheets/idle_power.webp','./assets/shadow/sheets/walk.webp','./assets/shadow/sheets/run.webp','./assets/shadow/sheets/dash.webp','./assets/shadow/sheets/jump.webp','./assets/shadow/sheets/combo.webp','./assets/shadow/sheets/guard.webp','./assets/shadow/sheets/hurt.webp','./assets/shadow/sheets/ko.webp','./assets/shadow/sheets/kiblast.webp','./assets/shadow/sheets/kiboom.webp','./assets/shadow/sheets/transform.webp','./assets/shadow/sheets/ultimate.webp','./assets/shadow/sheets/intro.webp','./assets/shadow/sheets/victory.webp',
   './icons/icon-192.png','./icons/icon-512.png','./icons/maskable-512.png','./icons/icon-180.png'];

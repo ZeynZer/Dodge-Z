@@ -25,7 +25,7 @@ function loadSave(){
 }
 let SV=loadSave();
 /* SHADOW FIGHTER est offert à tous les joueurs */
-if(!SV.ownV.includes('shadow')){SV.ownV.push('shadow');SV.ownS.shadow=[0];}
+if(!SV.shadowGift){SV.shadowGift=1;if(!SV.ownV.includes('shadow'))SV.ownV.push('shadow');SV.ownS.shadow=[0];SV.selV='shadow';SV.selS.shadow=0;save();}
 function save(){try{localStorage.setItem(SAVE_KEY,JSON.stringify(SV));}catch(e){}}
 const xpNeed=l=>100+60*(l-1);
 function lvlInfo(){let xp=SV.xp,l=1;while(xp>=xpNeed(l)){xp-=xpNeed(l);l++;}return{l,xp,need:xpNeed(l)};}
