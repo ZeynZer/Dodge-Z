@@ -1,0 +1,19 @@
+{
+  "name": "Dodge Zero",
+  "short_name": "Dodge Zero",
+  "description": "Esquive les balles des cyborgs, contre, achève. Jeu de réflexes en combat 2D.",
+  "lang": "fr",
+  "start_url": "./index.html",
+  "scope": "./",
+  "id": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#060608",
+  "theme_color": "#060608",
+  "categories": ["games"],
+  "icons": [
+    {"src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any"},
+    {"src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any"},
+    {"src": "icons/maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable"}
+  ]
+}
