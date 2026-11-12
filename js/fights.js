@@ -301,7 +301,7 @@ async function cineEnd(){
 }
 const CINE={
   async shadow(){ /* ÉCLIPSE ÉCARLATE : clip « ultimate » (charge 1,25 s puis rayon) */
-    tw(G,{dark:.8},.3);await tw(P,{x:70},.3);tw(cam,{z:1.2,fx:W/2,fy:GROUND-80},.5,easeOut);
+    tw(G,{dark:.8},.3);await tw(P,{x:66},.3);tw(cam,{z:1.06,fx:W/2,fy:GROUND-90},.5,easeOut);
     const done=playClip(P,'ultimate');Au.charge(1.25);
     await wait(1.25);
     flashScr('#fff',.9);Au.boom();shake(30);hitstop(.08);

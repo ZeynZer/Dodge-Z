@@ -433,7 +433,7 @@ def ultimate(F, t, A, D=3.0, beam_len=4.0):
     h = A.handpos('guard', dx=-.08)
     x0 = h[0] + A.face * U * .05
     grow = ease_out(seg(t, fire, fire + .35), 2)
-    thick = U * (.08 + .22 * grow) * (1 - end)
+    thick = U * (.06 + .15 * grow) * (1 - end)
     x1 = x0 + A.face * U * beam_len * grow
     if A.face > 0: fx.beam(F.Lf, x0, h[1], x1, thick, t, 1.2)
     else: fx.beam(F.Lf, x1, h[1], x0, thick, t, 1.2)
